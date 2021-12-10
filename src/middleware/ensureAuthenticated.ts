@@ -15,7 +15,7 @@ function ensureAuthenticated(
   if (!authToken) {
     return res.status(401).json({
       error: true,
-      message: "Token is invalid"
+      message: "Token is missing"
     });
   }
 
