@@ -1,5 +1,5 @@
 import { hash } from 'bcryptjs'
-import { prisma } from '../../database/prisma'
+import { prisma } from '../../infra/database/prisma'
 
 interface IUserRequest {
   name: string;
