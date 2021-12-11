@@ -1,9 +1,6 @@
-import crypto from "crypto"
 import { resolve } from "path"
-import dayjs from "dayjs"
 import { sign } from "jsonwebtoken"
 import { prisma } from "../../infra/database/prisma"
-import { mailConfig } from "../../infra/mail/client"
 import { SendMail } from "../sendMail/SendMail"
 
 class RequestResetPassword {
@@ -32,7 +29,7 @@ class RequestResetPassword {
 
     const templatePath = resolve(__dirname, '..', '..', 'views', 'mails', 'resetPassword.hbs')
 
-    const mailClient = new SendMail(mailConfig)
+    const mailClient = new SendMail()
 
     mailClient.execute({
       to: user.email,

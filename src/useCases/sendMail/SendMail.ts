@@ -1,6 +1,8 @@
 import fs from "fs"
-import { Transporter } from "nodemailer";
+import nodemailer, { Transporter } from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 import handlebars from "handlebars";
+import mailConfig from "../../infra/mail/client";
 
 interface IMailParams {
   to: string;
@@ -11,9 +13,26 @@ interface IMailParams {
 }
 
 class SendMail {
-  constructor(private client: Transporter) { }
+  private client: Transporter
+  constructor() {
+    const transporter = nodemailer.createTransport({
+      host: mailConfig.host,
+      port: mailConfig.port,
+      auth: {
+        user: mailConfig.user,
+        pass: mailConfig.pass
+      }
+    } as unknown as SMTPTransport.Options)
+    this.client = transporter
+  }
 
-  async execute({ to, from = "no-reply@app.com", subject, variables, path }: IMailParams) {
+  async execute({
+    to,
+    from = "no-reply@app.com",
+    subject,
+    variables,
+    path
+  }: IMailParams) {
     const templateFileContent = fs.readFileSync(path).toString('utf-8');
 
     const mailTemplateParse = handlebars.compile(templateFileContent)
