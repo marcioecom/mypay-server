@@ -28,7 +28,7 @@ function ensureAuthenticated(
 
     next();
   } catch (err) {
-    return res.json({
+    return res.status(401).json({
       error: true,
       message: err.message
     })

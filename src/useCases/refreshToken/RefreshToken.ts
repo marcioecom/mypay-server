@@ -24,7 +24,7 @@ class RefreshToken {
       const generateRefreshToken = new GenerateRefreshToken();
       const newRefreshToken = await generateRefreshToken.execute(refreshToken.userId);
 
-      return { token, newRefreshToken }
+      return { token, refreshToken: newRefreshToken }
     }
     return { token }
   }
