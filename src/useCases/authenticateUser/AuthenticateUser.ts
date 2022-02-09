@@ -1,6 +1,8 @@
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken"
 import { prisma } from "../../infra/database/prisma"
+import { GenerateRefreshToken } from "../../provider/GenerateRefreshToken";
+import { GenerateToken } from "../../provider/GenerateToken";
 
 interface IAuthUser {
   email: string;
@@ -25,16 +27,13 @@ class AuthenticateUser {
       throw new Error("Email/Password incorrect");
     }
 
-    const token = sign(
-      { email: user.email },
-      process.env.SECRET,
-      {
-        subject: user.id,
-        expiresIn: "1d",
-      }
-    );
+    const generateToken = new GenerateToken();
+    const token = await generateToken.execute(user.id);
 
-    return token;
+    const generateRefreshToken = new GenerateRefreshToken();
+    const refreshToken = await generateRefreshToken.execute(user.id);
+
+    return { token, refreshToken };
   }
 }
 
