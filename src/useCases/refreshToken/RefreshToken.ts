@@ -21,6 +21,12 @@ class RefreshToken {
     const token = await generateToken.execute(refreshToken.userId)
 
     if (refreshTokenExpired) {
+      await prisma.refreshToken.deleteMany({
+        where: {
+          userId: refreshToken.userId
+        }
+      })
+
       const generateRefreshToken = new GenerateRefreshToken();
       const newRefreshToken = await generateRefreshToken.execute(refreshToken.userId);
 
