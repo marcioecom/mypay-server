@@ -21,7 +21,7 @@ class RequestResetPassword {
     })
 
     const variables = {
-      name: user.name,
+      name: user.firstName,
       userId: user.id,
       token,
       link: process.env.APP_URL
