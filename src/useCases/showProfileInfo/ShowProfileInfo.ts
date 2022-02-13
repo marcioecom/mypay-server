@@ -11,6 +11,7 @@ class ShowProfileInfo {
         firstName: true,
         lastName: true,
         email: true,
+        admin: true,
       }
     })
 
