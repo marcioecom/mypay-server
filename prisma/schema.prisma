@@ -16,6 +16,7 @@ model User {
   lastName      String
   email         String        @unique
   password      String
+  admin         Boolean       @default(false)
   refresh_token RefreshToken?
 
   @@map("users")

@@ -8,10 +8,11 @@ interface IUserRequest {
   lastName: string;
   email: string;
   password: string;
+  admin: boolean;
 }
 
 class CreateUser {
-  async execute({ firstName, lastName, email, password }: IUserRequest) {
+  async execute({ firstName, lastName, email, password, admin = false }: IUserRequest) {
     const userAlredyExists = await prisma.user.findUnique({
       where: {
         email
@@ -33,7 +34,8 @@ class CreateUser {
         firstName,
         lastName,
         email,
-        password: passwordHash
+        password: passwordHash,
+        admin,
       }
     })
 

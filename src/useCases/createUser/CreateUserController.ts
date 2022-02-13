@@ -3,7 +3,7 @@ import { CreateUser } from "./CreateUser";
 
 class CreateUserController {
   async handle(req: Request, res: Response) {
-    const { firstName, lastName, email, password } = req.body
+    const { firstName, lastName, email, password, admin } = req.body
 
     const createUser = new CreateUser();
 
@@ -13,6 +13,7 @@ class CreateUserController {
         lastName,
         email,
         password,
+        admin,
       })
 
       return res.json(user);
