@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { usersRoutes } from "./users.routes";
+import { productsRoutes } from "./products.routes";
 import { AuthenticateUserController } from "../useCases/authenticateUser/AuthenticateUserController";
 import { RequestResetPasswordController } from "../useCases/requestResetPassword/RequestResetPasswordController";
 import { ResetPasswordController } from "../useCases/resetPassword/ResetPasswordController";
@@ -18,6 +19,7 @@ routes.post("/reset-password", resetPasswordController.handle)
 routes.post("/refresh-token", refreshTokenController.handle)
 
 routes.use("/users", usersRoutes)
+routes.use("/products", productsRoutes)
 
 export { routes };
 
