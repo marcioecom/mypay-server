@@ -18,7 +18,10 @@ class CreateProductController {
 
       return res.json(product);
     } catch (error) {
-      return res.status(400).send(error.message)
+      return res.status(400).json({
+        error: true,
+        message: error.message
+      })
     }
   }
 }
