@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "products" ADD COLUMN     "status" TEXT NOT NULL DEFAULT E'active',
+ADD COLUMN     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

@@ -4,7 +4,7 @@ interface ICreateProduct {
   userId: string;
   paymentMethod: string;
   name: string;
-  price: number,
+  price: number;
 }
 
 class CreateProduct {

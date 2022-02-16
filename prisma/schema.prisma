@@ -41,7 +41,9 @@ model Product {
   userId         String
   payment_method String
   price          Int
+  status         String   @default("active")
   created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
 
   @@map("products")
 }
