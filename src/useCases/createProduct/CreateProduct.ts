@@ -11,7 +11,10 @@ class CreateProduct {
   async execute({ userId, paymentMethod, name, price }: ICreateProduct) {
     const productNameAlredyExists = await prisma.product.findFirst({
       where: {
-        name
+        AND: [
+          { userId },
+          { name }
+        ]
       }
     })
 
